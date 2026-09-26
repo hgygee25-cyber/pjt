@@ -44,7 +44,7 @@ function App() {
 
   return (
     <div style={styles.container}>
-      <h1>🌷 오늘의 할 일 🌷</h1>
+      <h1>🌷 오늘의 할 일</h1>
 
       <div>
         <input
