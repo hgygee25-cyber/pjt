@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   // 할 일 목록
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
 
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+    }, [todos]);
   // 입력한 내용
   const [input, setInput] = useState("");
-
   // 할 일 추가
   const addTodo = () => {
     if (input.trim() === "") return;
-
     setTodos([
       ...todos,
       {
@@ -19,7 +23,6 @@ function App() {
         done: false,
       },
     ]);
-
     setInput("");
   };
 
@@ -41,7 +44,7 @@ function App() {
 
   return (
     <div style={styles.container}>
-      <h1>🌷 오늘의 할 일</h1>
+      <h1>🌷 오늘의 할 일 🌷</h1>
 
       <div>
         <input
